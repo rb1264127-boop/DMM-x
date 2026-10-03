@@ -1,0 +1,5 @@
+{ "expo": { "name": "DMM X", "slug": "dmmx", "version": "3.2.1", "userInterfaceStyle": "dark",
+  "plugins": [
+    ["expo-camera", { "cameraPermission": "Allow camera to create reels", "microphonePermission": "Allow microphone to record reels" }],
+    ["expo-media-library", { "photosPermission": "Allow DMM X to save your reels" }]
+  ] } }
