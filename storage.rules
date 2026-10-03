@@ -1,0 +1,12 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isAdmin() { return request.auth != null && request.auth.token.email == 'admin@dmmx.com'; }
+    // Uploaders can write to pending_review but NOT read it back. Only admin reads.
+    match /pending_review/{uid}/{file} {
+      allow create: if request.auth != null && request.auth.uid == uid && request.resource.size < 200 * 1024 * 1024;
+      allow read, delete: if isAdmin();
+    }
+    match /public/{file} { allow read: if true; allow write: if isAdmin(); }
+  }
+}
